@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-6">
+      <app-add-todo (todoAdd)="addTodo($event)"></app-add-todo>
+      <h4 class="">Current User: <span>{{user.name | titlecase}}</span></h4>
+    </div>
+    <div class="col-lg-6">
+      <app-user-listing>
+        <ul *ngFor="let user of users">
+          <li (click)="userChange(user.id)">{{user.name | titlecase}}</li>
+        </ul>
+      </app-user-listing>
+    </div>
+  </div>
+  <h4>Total Todos: {{noOfTodos}} </h4>
+  <div class="table table-bordered">
+    <table class="table table-striped">
+      <tr *ngIf="todos !== [];">
+        <td> <app-search (searchKeywordEvt)="searchFromTitle($event)" placeholder="Title Search"></app-search></td>
+      </tr>
+    </table>
+  </div>
+  <div *ngIf="todos.length === 0; else elseBlock">No Todos To Display</div>
+  <ng-template #elseBlock>
+    <app-todo-item>
+      <tr *ngFor="let todo of todos" class="p-0">
+        <td>{{todo.id}}</td>
+        <td>{{todo.userName}}</td>
+        <td>{{todo.title}}</td>
+        <td> <input type="checkbox" name="" id="" [checked]="todo.completed" (click)="toggleTodoCompletion(todo)"></td>
+        <td><button class="btn btn-danger text-white" (click)="onDeleteButtonClick(todo.id)">Delete</button></td>
+      </tr>
+    </app-todo-item>
+  </ng-template>
+</div>

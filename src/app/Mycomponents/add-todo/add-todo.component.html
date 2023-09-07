@@ -1,0 +1,19 @@
+<div class="container">
+    <h1 class = "text-center mb-3">Todo List</h1>
+
+<h4>Add A Todo</h4>
+<div class="my-3">
+<form  (ngSubmit)='onSubmit()' [formGroup]="addTaskForm">
+<div class="mb-3">
+    
+    <label for="title" class="form-label"><b>Title:</b></label>
+    <input type="text" class="form-control mb-4" formControlName="title" [(ngModel)]="title"  id="title"   placeholder="Title" (ngClass)="{'isInvalid':submitted}">
+    <!-- <span *ngIf="title.errors.required"></span> -->    
+  </div>
+<div class="col-12 my-3">
+    <button type="submit" class="btn btn-primary btn-sm"
+     [disabled]="addTaskForm.invalid"
+     >Add Todo</button>
+  </div>
+</form>
+</div>
